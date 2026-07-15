@@ -48,3 +48,4 @@
     @yield('content')
   </body>
 </html>
+

@@ -25,7 +25,7 @@
     <link rel="manifest" href="/site.webmanifest">
     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
     <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="theme-color" content="#ffffff">
+    <meta name="theme-color" content="#0B1220">
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@">
@@ -53,12 +53,15 @@
 @php
     $whiteBg = isset($params['white_bg']) && $params['white_bg'];
 @endphp
-<body class="{{ $whiteBg ? 'bg-white dark:bg-gray-900' : 'bg-gray-50 dark:bg-gray-800' }}">
+<body class="{{ $whiteBg ? 'bg-white' : 'bg-[#0B1220]' }}">
     <x-navbar-dashboard/>
-    <div class="flex pt-16 overflow-hidden bg-gray-50 dark:bg-gray-900">
+    <div class="flex pt-28 overflow-hidden bg-[#0B1220]">
         <x-sidebar.admin-sidebar/>
-        <div id="main-content" class="relative w-full h-full overflow-y-auto bg-gray-50 lg:ml-64 dark:bg-gray-900">
-            <main>
+        <div id="main-content"
+            x-data
+            :class="$store.sidebar.open ? 'lg:ml-64' : 'lg:ml-0'"
+            class="relative w-full min-h-[calc(100vh-7rem)] flex flex-col overflow-y-auto bg-[#0B1220] transition-all duration-300">
+            <main class="pb-20">
                 @yield('content')
             </main>
             <x-footer-dashboard/>
@@ -66,5 +69,6 @@
     </div>
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.2/datepicker.min.js"></script>
+    @stack('scripts')
 </body>
 </html>

@@ -17,12 +17,13 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
-
+   protected $fillable = [
+    'name',
+    'email',
+    'password',
+    'role',
+    'avatar',
+];
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -41,4 +42,30 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Relasi: satu user (staff/manajer gudang) bisa punya banyak transaksi stok.
+     */
+    public function stockTransactions()
+    {
+        return $this->hasMany(StockTransaction::class);
+    }
+
+    /**
+     * Helper cek role, biar gampang dipakai di controller/view/middleware.
+     */
+    public function isAdmin(): bool
+    {
+        return $this->role === 'Admin';
+    }
+
+    public function isManajerGudang(): bool
+    {
+        return $this->role === 'Manajer Gudang';
+    }
+
+    public function isStaffGudang(): bool
+    {
+        return $this->role === 'Staff Gudang';
+    }
 }

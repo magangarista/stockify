@@ -1,8 +1,11 @@
 @props(['icon' => null, 'routeName' => null, 'title' => null])
 <li>
     <a href="{{ route($routeName) }}"
-        class="text-base text-gray-900 rounded-lg flex items-center p-2 group hover:bg-gray-100 transition duration-75 pl-11 dark:text-gray-200 dark:hover:bg-gray-700
-    {{ request()->routeIs($routeName) ? 'bg-gray-200 dark:bg-gray-700' : '' }}">
+        class="flex items-center gap-2.5 pl-2 pr-3 py-2 rounded-lg text-sm transition-colors
+        {{ request()->routeIs($routeName)
+            ? 'text-white font-semibold'
+            : 'text-slate-400 hover:text-white font-medium' }}">
+        <span class="w-1.5 h-1.5 rounded-full flex-shrink-0 {{ request()->routeIs($routeName) ? 'bg-blue-400' : 'bg-slate-600' }}"></span>
         {{ $title }}
     </a>
 </li>
