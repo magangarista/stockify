@@ -28,6 +28,8 @@
                 <div>
                     <label for="phone" class="block mb-1.5 text-sm font-semibold text-gray-300">Telepon</label>
                     <input type="text" name="phone" id="phone" value="{{ old('phone') }}"
+                           inputmode="numeric"
+                           oninput="this.value = this.value.replace(/[^0-9-]/g, '')"
                            class="bg-gray-950 border border-gray-700 text-white text-sm rounded-lg block w-full p-2.5 placeholder-gray-600 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors"
                            placeholder="Contoh: 021-5551234">
                     @error('phone') <p class="text-sm text-red-400 mt-1.5">{{ $message }}</p> @enderror

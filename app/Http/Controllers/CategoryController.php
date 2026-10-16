@@ -12,6 +12,7 @@ class CategoryController extends Controller
 {
     public function __construct(protected CategoryService $categoryService)
     {
+        // Seluruh aksi (termasuk melihat daftar) hanya bisa diakses role Admin.
         $this->middleware('role:Admin');
     }
 
